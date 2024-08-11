@@ -5,10 +5,14 @@
 --
 return {
   {
+    'github/copilot.vim',
+  },
+  {
     'lunarvim/synthwave84.nvim',
     priority = 1000,
     init = function()
       vim.cmd.colorscheme 'synthwave84'
+      vim.cmd.hi 'Comment gui=none'
     end,
   },
   {
@@ -35,7 +39,7 @@ return {
       local harpoon = require 'harpoon'
       harpoon:setup()
 
-      vim.keymap.set('n', '<leader>a', function()
+      vim.keymap.set('n', '<C-a>', function()
         harpoon:list():add()
       end)
       vim.keymap.set('n', '<C-d>', function()
@@ -56,10 +60,10 @@ return {
       end)
 
       -- Toggle previous & next buffers stored within Harpoon list
-      vim.keymap.set('n', '<C-S-P>', function()
+      vim.keymap.set('n', '<C-p>', function()
         harpoon:list():prev()
       end)
-      vim.keymap.set('n', '<C-S-N>', function()
+      vim.keymap.set('n', '<C-n>', function()
         harpoon:list():next()
       end)
     end,
