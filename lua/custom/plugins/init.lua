@@ -5,29 +5,11 @@
 --
 return {
   {
-    'github/copilot.vim',
-  },
-  {
     'lunarvim/synthwave84.nvim',
     priority = 1000,
     init = function()
       vim.cmd.colorscheme 'synthwave84'
       vim.cmd.hi 'Comment gui=none'
-    end,
-  },
-  {
-    'lervag/vimtex',
-    lazy = false, -- we don't want to lazy load VimTeX
-    -- tag = "v2.15", -- uncomment to pin to a specific release
-    init = function()
-      -- VimTeX configuration goes here, e.g.
-      -- vim.g.vimtex_view_general_viewer = 'okular'
-      -- vim.g.vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
-      vim.g.vimtex_view_method = 'sioyek'
-      vim.g.vimtex_view_sioyek_exe = 'sioyek.AppImage'
-      vim.g.vimtex_compiler_method = 'tectonic'
-      vim.g.vimtex_fold_enabled = 0
-      vim.w.conceallevel = 2
     end,
   },
   {
@@ -67,5 +49,41 @@ return {
         harpoon:list():next()
       end)
     end,
+  },
+  {
+    'lervag/vimtex',
+    lazy = false, -- we don't want to lazy load VimTeX
+    -- tag = "v2.15", -- uncomment to pin to a specific release
+    init = function()
+      -- VimTeX configuration goes here, e.g.
+      vim.g.vimtex_view_method = 'sioyek'
+      vim.g.vimtex_view_sioyek_exe = 'sioyek.AppImage'
+      vim.g.vimtex_compiler_method = 'tectonic'
+      vim.g.vimtex_fold_enabled = 0
+      vim.wo.conceallevel = 2
+    end,
+  },
+  {
+    'folke/trouble.nvim',
+    config = function()
+      require('trouble').setup {
+        icons = false,
+      }
+
+      vim.keymap.set('n', '<leader>tt', function()
+        require('trouble').toggle()
+      end)
+
+      vim.keymap.set('n', '[t', function()
+        require('trouble').next { skip_groups = true, jump = true }
+      end)
+
+      vim.keymap.set('n', ']t', function()
+        require('trouble').previous { skip_groups = true, jump = true }
+      end)
+    end,
+  },
+  {
+    'github/copilot.vim',
   },
 }
