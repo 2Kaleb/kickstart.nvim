@@ -1,4 +1,3 @@
--- You can add your own plugins here or in other files in this directory!
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
@@ -6,11 +5,6 @@
 return {
   {
     'lunarvim/synthwave84.nvim',
-    priority = 1000,
-    init = function()
-      vim.cmd.colorscheme 'synthwave84'
-      vim.cmd.hi 'Comment gui=none'
-    end,
   },
   {
     'ThePrimeagen/harpoon',
@@ -58,9 +52,12 @@ return {
       -- VimTeX configuration goes here, e.g.
       vim.g.vimtex_view_method = 'sioyek'
       vim.g.vimtex_view_sioyek_exe = 'sioyek.AppImage'
-      vim.g.vimtex_compiler_method = 'tectonic'
+      vim.g.vimtex_compiler_method = 'latexmk'
+      vim.g.vimtex_compiler_latexmk = { continuous = 0 }
+      -- vim.g.vimtex_compiler_tectonic = {options=--keep-intermediate}
       vim.g.vimtex_fold_enabled = 0
       vim.wo.conceallevel = 2
+      vim.g.vimtex_syntax_conceal = { cites = 0, sections = 1 }
     end,
   },
   {
