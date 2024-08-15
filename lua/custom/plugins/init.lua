@@ -53,7 +53,7 @@ return {
       vim.g.vimtex_view_method = 'sioyek'
       vim.g.vimtex_view_sioyek_exe = 'sioyek.AppImage'
       vim.g.vimtex_compiler_method = 'latexmk'
-      vim.g.vimtex_compiler_latexmk = { continuous = 0 }
+      -- vim.g.vimtex_compiler_latexmk = { continuous = 0 }
       -- vim.g.vimtex_compiler_tectonic = {options=--keep-intermediate}
       vim.g.vimtex_fold_enabled = 0
       vim.wo.conceallevel = 2

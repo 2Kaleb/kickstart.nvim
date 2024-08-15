@@ -509,26 +509,53 @@ require('lazy').setup({
         },
         ruff = {},
         texlab = {
-          auxDirectory = '.',
           bibtexFormatter = 'texlab',
           build = {
-            args = { '-pdf', '-interaction=nonstopmode', '-synctex=1', '%f' },
-            executable = 'tectonic',
-            forwardSearchAfter = false,
-            onSave = false,
+            executable = 'latexmk',
+            forwardSearchAfter = true,
+            onSave = true,
+            args = {
+              '-pv',
+            },
           },
+          -- build = {
+          --   executable = 'tectonic',
+          --   forwardSearchAfter = true,
+          --   onSave = true,
+          --   args = {
+          --     '-X',
+          --     'compile',
+          --     '%f',
+          --     '--synctex',
+          --     '--keep-logs',
+          --     '--keep-intermediates',
+          --   },
+          -- },
           chktex = {
-            onEdit = false,
-            onOpenAndSave = false,
+            onEdit = true,
+            onOpenAndSave = true,
           },
-          diagnosticsDelay = 300,
-          formatterLineLength = 80,
           forwardSearch = {
-            args = {},
+            executable = '/home/kdebre/.local/bin/sioyek.AppImage',
+            args = {
+              '--reuse-window',
+              '--execute-command',
+              'toggle_synctex',
+              '--inverse-search',
+              'texlab inverse-search -i "%%1" -l %%2',
+              '--forward-search-file',
+              '%f',
+              '--forward-search-line',
+              '%l',
+              '%p',
+            },
+          },
+          completion = {
+            matcher = 'prefix-ignore-case',
           },
           latexFormatter = 'latexindent',
           latexindent = {
-            modifyLineBreaks = false,
+            modifyLineBreaks = true,
           },
         },
       }
@@ -546,6 +573,7 @@ require('lazy').setup({
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'tectonic',
+        'latexindent',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -579,7 +607,8 @@ require('lazy').setup({
       },
     },
     opts = {
-      notify_on_error = false,
+      notify_on_error = true,
+      notify_no_formatters = true,
       format_on_save = function(bufnr)
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
@@ -594,6 +623,7 @@ require('lazy').setup({
         lua = { 'stylua' },
         -- Conform can also run multiple formatters sequentially
         python = { 'ruff' },
+        latex = { 'latexindent' },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
         -- javascript = { "prettierd", "prettier", stop_after_first = true },
@@ -819,7 +849,7 @@ require('lazy').setup({
   require 'kickstart.plugins.debug',
   require 'kickstart.plugins.indent_line',
   require 'kickstart.plugins.lint',
-  -- require 'kickstart.plugins.autopairs',
+  require 'kickstart.plugins.autopairs',
   require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
 
