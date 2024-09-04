@@ -3,8 +3,24 @@
 -- See the kickstart.nvim README for more information
 --
 return {
+  -- {
+  --   'lunarvim/synthwave84.nvim',
+  -- },
   {
-    'lunarvim/synthwave84.nvim',
+    'maxmx03/fluoromachine.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      local fm = require 'fluoromachine'
+
+      fm.setup {
+        glow = true,
+        theme = 'delta', --fluoromachine retrowave delta
+        transparent = false,
+      }
+
+      vim.cmd.colorscheme 'fluoromachine'
+    end,
   },
   {
     'ThePrimeagen/harpoon',
