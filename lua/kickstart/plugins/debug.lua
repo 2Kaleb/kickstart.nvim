@@ -96,6 +96,6 @@ return {
 
     -- Install golang specific config
 
-    require('dap-python').setup '/home/kdebre/miniconda3/envs/kdebre/bin/python3.12'
+    require('dap-python').setup '/home/kdebre/micromamba/envs/2kaleb/bin/python3.12'
   end,
 }
